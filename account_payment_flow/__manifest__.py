@@ -7,7 +7,7 @@
     'website': "corner.store59@gmail.com",
     'category': 'account',
     'version': '15.0.0.0.1',
-    'depends': ['account_accountant'],
+    'depends': ['account'],
     'data': [
         'security/ir.model.access.csv',
         'views/account_payment_flow_view.xml',
