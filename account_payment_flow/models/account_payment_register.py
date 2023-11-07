@@ -6,7 +6,7 @@ class AccountPaymentRegister(models.TransientModel):
     _inherit = 'account.payment.register'
 
     mp_flujo_id = fields.Many2one(comodel_name="mp.flujo")
-    mp_grupo_flujo_ids = fields.One2many(related="mp_flujo_id.grupo_flujo_ids")
+    mp_grupo_flujo_ids = fields.Many2many(related="mp_flujo_id.grupo_flujo_ids")
     mp_grupo_flujo_id = fields.Many2one(comodel_name="mp.grupo.flujo", domain="[('id', 'in', mp_grupo_flujo_ids)]")
 
     @api.onchange("mp_flujo_id")
