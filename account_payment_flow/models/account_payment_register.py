@@ -26,3 +26,11 @@ class AccountPaymentRegister(models.TransientModel):
             to_process[0]['create_vals']['mp_grupo_flujo_id'] = self.mp_grupo_flujo_id.id
         res = super(AccountPaymentRegister, self)._init_payments(to_process, edit_mode)
         return res
+    
+    def _get_line_batch_key(self, line):
+        res = super(AccountPaymentRegister, self)._get_line_batch_key(line)
+        res.update({
+            'mp_flujo_id': line.move_id.mp_flujo_id.id,
+            'mp_grupo_flujo_id': line.move_id.mp_grupo_flujo_id.id,
+            })
+        return res
