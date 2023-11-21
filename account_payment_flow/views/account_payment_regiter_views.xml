@@ -6,11 +6,11 @@
         <field name="inherit_id" ref="account.view_account_payment_register_form"/>
         <field name="arch" type="xml">
             <xpath expr="//field[@name='partner_bank_id']" position="after">
-                <field name="mp_flujo_id" options="{'no_create': True}"/>
+                <field name="mp_grupo_flujo_id" options="{'no_create': True}"/>
             </xpath>
             <xpath expr="//field[@name='communication']" position="after">
-                <field name="mp_grupo_flujo_id" options="{'no_create': True}"/>
                 <field name="mp_grupo_flujo_ids" invisible="1"/>
+                <field name="mp_flujo_id" options="{'no_create': True}"/>
             </xpath>
         </field>
     </record>
