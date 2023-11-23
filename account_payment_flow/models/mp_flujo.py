@@ -10,6 +10,7 @@ class MpFlujo(models.Model):
                                        column2="grupo_flujo_id")
     decripcion = fields.Text()
     display_name = fields.Text(compute="_compute_display_name")
+    mp_grupo_flujo_id = fields.Many2one(comodel_name="mp.grupo.flujo")
 
     def _compute_display_name(self):
         for flujo_id in self:

@@ -5,14 +5,14 @@ from odoo.exceptions import UserError
 class AccountPaymentRegister(models.TransientModel):
     _inherit = 'account.payment.register'
 
-    mp_flujo_id = fields.Many2one(comodel_name="mp.flujo")
-    mp_grupo_flujo_ids = fields.Many2many(related="mp_flujo_id.grupo_flujo_ids")
-    mp_grupo_flujo_id = fields.Many2one(comodel_name="mp.grupo.flujo", domain="[('id', 'in', mp_grupo_flujo_ids)]")
+    mp_flujo_id = fields.Many2one(comodel_name="mp.flujo", domain="[('id', 'in', mp_flujo_ids)]")
+    mp_flujo_ids = fields.One2many(related="mp_grupo_flujo_id.mp_flujo_ids")
+    mp_grupo_flujo_id = fields.Many2one(comodel_name="mp.grupo.flujo")
 
-    @api.onchange("mp_flujo_id")
+    @api.onchange("mp_grupo_flujo_id")
     def _onchange_mp_flujo_id(self):
         for register_id in self:
-            register_id.mp_grupo_flujo_id = self.env['mp.grupo.flujo']
+            register_id.mp_flujo_id = self.env['mp.flujo']
 
     def action_create_payments(self):
         if not self.mp_flujo_id and not self.mp_grupo_flujo_id:
