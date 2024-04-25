@@ -6,6 +6,7 @@
         <field name="arch" type="xml">
             <tree string="Journal Entries" sample="1" decoration-info="state == 'draft'">
                 <field name="date"/>
+                <field name="payment_state" invisible="1"/>
                 <field name="name"/>
                 <field name="partner_id"/>
                 <field name="ref" optional="show"/>
@@ -16,7 +17,7 @@
                 <field name="currency_id" invisible="1"/>
                 <field name="to_check" optional="hide" widget="boolean_toggle"/>
                 <field name="invoice_outstanding_credits_debits_widget"
-                                            class="oe_invoice_outstanding_credits_debits"
+                       class="oe_invoice_outstanding_credits_debits btn-danger"
                        nolabel="1" widget="payment"/>
             </tree>
         </field>
@@ -30,7 +31,8 @@
         <field name="domain">[
             ('state', '!=', 'draft'),
             ('move_type', '=', 'in_invoice'),
-            ]</field>
+            ('payment_state', '!=', 'paid'),
+        ]</field>
     </record>
 
     <menuitem id="menu_action_account_reconcile_bill"

@@ -16,11 +16,9 @@ class AccountMove(models.Model):
 
     def _compute_debit_amount_reconcile(self):
         for move_id in self:
-            print('smn')
             payment_ids = self.env['account.payment'].search([
                 ('partner_id', '=', move_id.partner_id.id),
                 ('is_reconciled', '=', False),
                 ('is_matched', '=', False),
             ])
             move_id.payment_ids = payment_ids
-            print('smn')
